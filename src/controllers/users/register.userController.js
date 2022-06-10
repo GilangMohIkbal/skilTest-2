@@ -1,12 +1,47 @@
 const { Users } = require("../../models");
 const service = async (req,res) => {
     try {
-        const payload = req.body;
-        const requestDB = await Users.create(payload);
-        return res.json({
-            msg: "User created successfully",
-            data: requestDB,
-        });
+        const name = req.body.name;
+        const address = req.body.address;
+        const gender = req.body.gender;
+        const email = req.body.email;
+        const password = req.body.password;
+        if (name === "") {
+            res.status(400).json({
+                message: "Name cannot be empty"
+            });
+        }
+        if (address === ''){
+            res.status(400).json({
+                message: "Address cannot be empty"
+            })
+        } 
+        if( gender === '') {
+            res.status(400).json({
+                message: "gender cannot be empty"
+            })
+        }
+        if ( email === '') {
+            res.status(400).json({
+                message: "email cannot be empty"
+            })
+        }
+
+        if ( password === '') {
+            res.status(400).json({
+                message: "password cannot be empty"
+            })
+        }
+        
+        else {
+            const payload = req.body;
+            const requestDB = await Users.create(payload);
+            return res.json({
+                msg: "User created successfully",
+                data: requestDB,
+            });
+        }
+       
     } catch (error) {
         return res.status(500).json({
             msg: error.toString(),
