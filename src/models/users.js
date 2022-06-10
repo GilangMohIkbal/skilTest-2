@@ -14,12 +14,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Users.init({
-    id: DataTypes.STRING(36),
-    name: DataTypes.STRING(50),
-    address: DataTypes.STRING(255),
-    gender: DataTypes.ENUM("Laki-laki","Perempuan"),
-    email: DataTypes.STRING(255),
-    password: DataTypes.STRING(255)
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      required: true
+    },
+    address: {
+      type: DataTypes.STRING(255),
+      required: true
+    },
+    gender: {
+      type: DataTypes.ENUM("Laki-laki","Perempuan"),
+      require:true
+    },
+    email: {
+      type: DataTypes.STRING(255),
+      require: true,
+    },
+    password: {
+      type:DataTypes.STRING(255),
+      required: true
+    }
   }, {
     sequelize,
     modelName: 'Users',
