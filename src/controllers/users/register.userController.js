@@ -1,4 +1,6 @@
 const { Users } = require("../../models");
+// validator email
+const validator = require('validator')
 const service = async (req,res) => {
     try {
         const name = req.body.name;
@@ -32,7 +34,14 @@ const service = async (req,res) => {
                 message: "password cannot be empty"
             })
         }
-        
+        // validasi email valid
+        if(email) {
+            if(!validator.isEmail(email)) {
+                res.status(400).json({
+                    message: "email is not valid"
+                })
+            }
+        }
         else {
             const payload = req.body;
             const requestDB = await Users.create(payload);
