@@ -6,11 +6,13 @@ const service = async (req,res) => {
     try {
             const payload = req.body;
             const requestDB = await Users.create(payload);
-
+            console.log(requestDB);
             return res.json({
                 message: "User created successfully",
                 data: requestDB,
+                
             });
+            
         
        
     } catch (error) {
@@ -48,10 +50,12 @@ const validation = [
     body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
 
     
-    // body('gender').not().isEmpty().withMessage('Gender cannot be empty').custom((value)=> {
+    body('gender').not().isEmpty().withMessage('Gender cannot be empty'),
+    // custom((value)=> {
         
     //     if (!value === 'laki-laki' && !value === 'perempuan') {
     //         throw new Error('gender harus berisi laki laki atau perempuan')
+            
     //     }
     // })
     

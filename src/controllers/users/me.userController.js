@@ -6,9 +6,7 @@ const service = async (req, res) => {
             where: {
                 id: req.auth.user.id
             },
-            attributes : {
-                exclude : ["password"]
-            }
+            attributes : ['name','phone','gender']
         })
         if(!user) 
             return res.status(404).json({
